@@ -36,4 +36,21 @@ export default function Admin() {
   return token ? (
     <div className="p-4 max-w-xl mx-auto">
       <h2 className="text-2xl mb-2 font-bold">Add a Book</h2>
-      {['title', 'subtitle', 'exc]()
+      {['title', 'subtitle', 'excerpt', 'cover', 'wattpad'].map(f => (
+        <input
+          key={f}
+          name={f}
+          value={form[f]}
+          onChange={handleChange}
+          placeholder={f.charAt(0).toUpperCase() + f.slice(1)}
+          className="block border border-gray-300 p-2 mb-2 w-full rounded"
+        />
+      ))}
+      <button
+        onClick={saveBook}
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        Save
+      </button>
+
+      <h2 className="t
