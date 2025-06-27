@@ -34,4 +34,6 @@ export default function Admin() {
   }
 
   return token ? (
-    <div className="p-4 max-w-xl mx-aut
+    <div className="p-4 max-w-xl mx-auto">
+      <h2 className="text-2xl mb-2 font-bold">Add a Book</h2>
+      {['title', 'subtitle', 'exc]()
