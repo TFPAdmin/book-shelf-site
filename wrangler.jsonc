@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "book-shelf-site",
+  "main": "api/index.js",
+  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_date": "2025-04-01",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "book-shelf",
+      "database_id": "f0159cd3-fe12-4178-95f2-5b77165b93e8"
+    }
+  ]
+}
