@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 
 const API_BASE = 'https://book-shelf-site.alyeska.workers.dev'
@@ -53,4 +54,62 @@ export default function Admin() {
         Save
       </button>
 
-      <h2 className="t
+      <h2 className="text-xl mt-6 font-semibold">Books</h2>
+      <ul className="mt-2 space-y-1">
+        {books.map(book => (
+          <li key={book.id} className="border-b pb-1">
+            <strong>{book.title}</strong> — <em>{book.subtitle}</em>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <LoginForm setToken={setToken} />
+  )
+}
+
+function LoginForm({ setToken }) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  async function login() {
+    const res = await fetch(`${API_BASE}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    })
+
+    const data = await res.json()
+    if (data.token) {
+      localStorage.setItem('token', data.token)
+      setToken(data.token)
+    } else {
+      alert('Login failed. Please check your credentials.')
+    }
+  }
+
+  return (
+    <div className="p-4 max-w-sm mx-auto">
+      <h2 className="text-xl mb-4 font-bold">Admin Login</h2>
+      <input
+        placeholder="Username"
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+        className="block mb-2 border p-2 w-full rounded"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        className="block mb-4 border p-2 w-full rounded"
+      />
+      <button
+        onClick={login}
+        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      >
+        Login
+      </button>
+    </div>
+  )
+}
